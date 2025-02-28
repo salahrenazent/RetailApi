@@ -38,7 +38,7 @@ ADO.Initialize(builder.Configuration);
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;//set property names to old app format
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;//set property names of api responce to old app format
     });
 
 //for avoiding 400 validation error of every api request
