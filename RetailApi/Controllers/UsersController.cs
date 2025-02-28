@@ -128,7 +128,7 @@ namespace RetailApi.Controllers
 
             return res;
         }
-
+        //user registration method
         [HttpPost]
         [Route("save")]
         public UserResponse SaveData(User userData)
