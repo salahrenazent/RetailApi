@@ -69,21 +69,21 @@ namespace RetailApi.Models
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public int STATUS_ID { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string SUPP_NAME { get; set; }
+        public string? SUPP_NAME { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string CURRENCY { get; set; }
+        public string? CURRENCY { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string STORE { get; set; }
+        public string? STORE { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string NARRATION { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string STATUS { get; set; }
+        public string? STATUS { get; set; }
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
 
         public DateTime DELIVERY_DATE { get; set; }
         public int USER_ID { get; set; }
-        public string PAY_TERM { get; set; }
-        public string DELIVERY_TERM { get; set; }
+        public string? PAY_TERM { get; set; }
+        public string? DELIVERY_TERM { get; set; }
 
 
         public List<PurchaseOrderDetail> PoDetails { get; set; }
@@ -97,7 +97,7 @@ namespace RetailApi.Models
         public int JOB_ID { get; set; }
         public int ITEM_ID { get; set; }
         public float QUANTITY { get; set; }
-        public string PACKING { get; set; }
+        public string? PACKING { get; set; }
         public float PRICE { get; set; }
         public float AMOUNT { get; set; }
         public float DISC_PERCENT { get; set; }
@@ -111,7 +111,7 @@ namespace RetailApi.Models
         public float SUPP_PRICE { get; set; }
         public float SUPP_AMOUNT { get; set; }
         public int CREATE_STORE_ID { get; set; }
-        public string ITEM_CODE { get; set; }
+        public string? ITEM_CODE { get; set; }
     }
 
     public class PurchaseOrderResponse

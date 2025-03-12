@@ -11,7 +11,7 @@
         public DateTime GRN_DATE { get; set; }
         public int SUPP_ID { get; set; }
         public float NET_AMOUNT { get; set; }
-        public float TOTAL_COST { get; set; }
+        public float? TOTAL_COST { get; set; }
         public float SUPP_GROSS_AMOUNT { get; set; }
         public float SUPP_NET_AMOUNT { get; set; }
         public float EXCHANGE_RATE { get; set; }

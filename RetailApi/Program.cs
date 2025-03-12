@@ -35,7 +35,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 ADO.Initialize(builder.Configuration);
 
 //add controllers
-builder.Services.AddControllers()
+builder.Services.AddControllers(options =>
+{
+    options.ModelBinderProviders.Insert(0, new FlexibleModelBinderProvider());
+})
+//builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = null;//set property names of api responce to old app format

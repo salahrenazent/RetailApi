@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RetailApi.DAL.Interfaces;
+using RetailApi.Helper;
 using RetailApi.Models;
 
 namespace RetailApi.Controllers
