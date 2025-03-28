@@ -40,7 +40,7 @@ builder.Services.AddControllers(options =>
     options.ModelBinderProviders.Insert(0, new FlexibleModelBinderProvider());
 })
 //builder.Services.AddControllers()
-    .AddJsonOptions(options =>
+    .AddJsonOptions(options =>  
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = null;//set property names of api responce to old app format
     });
