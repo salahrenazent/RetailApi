@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 
 namespace RetailApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class DepartmentController : ControllerBase

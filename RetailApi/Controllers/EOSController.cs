@@ -10,21 +10,21 @@ namespace RetailApi.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class DesignationController : ControllerBase
+    public class EOSController : ControllerBase
     {
-        private readonly IDesignationService _DesignationService;
-        public DesignationController(IDesignationService DesignationService)
+        private readonly IEOSService _EosReasonService;
+        public EOSController(IEOSService EOSService)
         {
-            _DesignationService = DesignationService;
+            _EosReasonService = EOSService;
         }
         [HttpPost]
         [Route("list")]
-        public DesignationResponse List()
+        public EosReasonResponse List()
         {
-            DesignationResponse res = new DesignationResponse();
+            EosReasonResponse res = new EosReasonResponse();
             try
             {
-                res.datas = _DesignationService.GetAllDesignations();
+                res.datas = _EosReasonService.GetAllEosReasons();
             }
             catch (Exception ex)
             {
@@ -36,32 +36,32 @@ namespace RetailApi.Controllers
 
         [HttpPost]
         [Route("select/{id:int}")]
-        public DesignationResponse Select(int id)
+        public EosReasonResponse Select(int id)
         {
-            DesignationResponse responce = new DesignationResponse();
+            EosReasonResponse response = new EosReasonResponse();
             try
             {
-                responce.data = _DesignationService.GetDesignationById(id);
+                response.data = _EosReasonService.GetEosReasonById(id);
             }
             catch (Exception ex)
             {
-                responce.flag = "0";
-                responce.message = ex.Message;
+                response.flag = "0";
+                response.message = ex.Message;
             }
-            return responce;
+            return response;
         }
 
         [HttpPost]
         [Route("save")]
-        public DesignationResponse SaveData(Designation designationData)
+        public EosReasonResponse SaveData(EosReason eosReasonData)
         {
-            DesignationResponse res = new DesignationResponse();
+            EosReasonResponse res = new EosReasonResponse();
             try
             {
-                Int32 ID = _DesignationService.SaveDesignation(designationData);
+                Int32 ID = _EosReasonService.SaveEosReason(eosReasonData);
                 res.flag = "1";
                 res.message = "Success";
-                res.data = _DesignationService.GetDesignationById(ID);
+                res.data = _EosReasonService.GetEosReasonById(ID);
             }
             catch (Exception ex)
             {
@@ -73,15 +73,15 @@ namespace RetailApi.Controllers
 
         [HttpPost]
         [Route("edit")]
-        public DesignationResponse EditData(Designation designationData)
+        public EosReasonResponse EditData(EosReason eosReasonData)
         {
-            DesignationResponse res = new DesignationResponse();
+            EosReasonResponse res = new EosReasonResponse();
             try
             {
-                Int32 ID = _DesignationService.SaveDesignation(designationData);
+                Int32 ID = _EosReasonService.SaveEosReason(eosReasonData);
                 res.flag = "1";
                 res.message = "Success";
-                res.data = _DesignationService.GetDesignationById(ID);
+                res.data = _EosReasonService.GetEosReasonById(ID);
             }
             catch (Exception ex)
             {
@@ -93,15 +93,15 @@ namespace RetailApi.Controllers
 
         [HttpPost]
         [Route("delete/{id:int}")]
-        public DesignationResponse Delete(int id)
+        public EosReasonResponse Delete(int id)
         {
-            DesignationResponse res = new DesignationResponse();
+            EosReasonResponse res = new EosReasonResponse();
             try
             {
-                _DesignationService.DeleteDesignation(id);
+                _EosReasonService.DeleteEosReason(id);
                 res.flag = "1";
                 res.message = "Success";
-                res.data = _DesignationService.GetDesignationById(id);
+                res.data = _EosReasonService.GetEosReasonById(id);
             }
             catch (Exception ex)
             {
@@ -112,3 +112,4 @@ namespace RetailApi.Controllers
         }
     }
 }
+
