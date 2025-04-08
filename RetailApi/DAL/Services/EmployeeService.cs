@@ -251,7 +251,7 @@ namespace RetailApi.DAL.Services
             }
             catch (Exception ex)
             {
-
+                throw new Exception(ex.Message);
             }
             return employee;
         }
