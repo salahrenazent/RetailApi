@@ -47,13 +47,10 @@ namespace RetailApi.DAL.Services
                         BANK_AC_NO = Convert.IsDBNull(dr["BANK_AC_NO"]) ? null : Convert.ToString(dr["BANK_AC_NO"]),
                         PP_NO = Convert.IsDBNull(dr["PP_NO"]) ? null : Convert.ToString(dr["PP_NO"]),
                         PP_EXPIRY = Convert.IsDBNull(dr["PP_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["PP_EXPIRY"]),
-                        IQAMA_NO = Convert.IsDBNull(dr["IQAMA_NO"]) ? null : Convert.ToString(dr["IQAMA_NO"]),
-                        IQAMA_EXPIRY = Convert.IsDBNull(dr["IQAMA_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["IQAMA_EXPIRY"]),
                         VISA_NO = Convert.IsDBNull(dr["VISA_NO"]) ? null : Convert.ToString(dr["VISA_NO"]),
                         VISA_EXPIRY = Convert.IsDBNull(dr["VISA_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["VISA_EXPIRY"]),
                         LICENSE_NO = Convert.IsDBNull(dr["LICENSE_NO"]) ? null : Convert.ToString(dr["LICENSE_NO"]),
                         LICENSE_EXPIRY = Convert.IsDBNull(dr["LICENSE_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["LICENSE_EXPIRY"]),
-                        EMP_STATUS = Convert.IsDBNull(dr["EMP_STATUS"]) ? 0 : Convert.ToInt32(dr["EMP_STATUS"]),
                         IS_SALESMAN = Convert.IsDBNull(dr["IS_SALESMAN"]) ? (bool?)null : Convert.ToBoolean(dr["IS_SALESMAN"]),
                         IMAGE_NAME = Convert.IsDBNull(dr["IMAGE_NAME"]) ? null : Convert.ToString(dr["IMAGE_NAME"]),
                         WORK_PERMIT_NO = Convert.IsDBNull(dr["WORK_PERMIT_NO"]) ? null : Convert.ToString(dr["WORK_PERMIT_NO"]),
@@ -61,19 +58,18 @@ namespace RetailApi.DAL.Services
                         IBAN_NO = Convert.IsDBNull(dr["IBAN_NO"]) ? null : Convert.ToString(dr["IBAN_NO"]),
                         DAMAN_NO = Convert.IsDBNull(dr["DAMAN_NO"]) ? null : Convert.ToString(dr["DAMAN_NO"]),
                         DAMAN_CATEGORY = Convert.IsDBNull(dr["DAMAN_CATEGORY"]) ? null : Convert.ToString(dr["DAMAN_CATEGORY"]),
-                        LEAVE_CREDIT = Convert.IsDBNull(dr["LEAVE_CREDIT"]) ? (float?)null : Convert.ToSingle(dr["LEAVE_CREDIT"]),
-                        LESS_SERVICE_DAYS = Convert.IsDBNull(dr["LESS_SERVICE_DAYS"]) ? (float?)null : Convert.ToSingle(dr["LESS_SERVICE_DAYS"]),
-                        HOLD_SALARY = Convert.IsDBNull(dr["HOLD_SALARY"]) ? (bool?)null : Convert.ToBoolean(dr["HOLD_SALARY"]),
                         MOL_NUMBER = Convert.IsDBNull(dr["MOL_NUMBER"]) ? null : Convert.ToString(dr["MOL_NUMBER"]),
                         LAST_REJOIN_DATE = Convert.IsDBNull(dr["LAST_REJOIN_DATE"]) ? (DateTime?)null : Convert.ToDateTime(dr["LAST_REJOIN_DATE"]),
-                        INCENTIVE_PERCENT = Convert.IsDBNull(dr["INCENTIVE_PERCENT"]) ? (float?)null : Convert.ToSingle(dr["INCENTIVE_PERCENT"]),
-                        STORE_ID = Convert.IsDBNull(dr["STORE_ID"]) ? 0 : Convert.ToInt32(dr["STORE_ID"]),
-                        IS_DELETED = Convert.IsDBNull(dr["IS_DELETED"]) ? null : Convert.ToString(dr["IS_DELETED"]),
+                        IS_DELETED = Convert.IsDBNull(dr["IS_DELETED"]) ? false : Convert.ToBoolean(dr["IS_DELETED"]),
                         STORE_NAME = Convert.IsDBNull(dr["STORE_NAME"]) ? null : Convert.ToString(dr["STORE_NAME"]),
                         STATE_NAME = Convert.IsDBNull(dr["STATE_NAME"]) ? null : Convert.ToString(dr["STATE_NAME"]),
-                        COUNTRY_NAME = Convert.IsDBNull(dr["COUNTRY_NAME"]) ? null : Convert.ToString(dr["COUNTRY_NAME"]),
                         DEPT_NAME = Convert.IsDBNull(dr["DEPT_NAME"]) ? null : Convert.ToString(dr["DEPT_NAME"]),
-                        DESG_NAME = Convert.IsDBNull(dr["DESG_NAME"]) ? null : Convert.ToString(dr["DESG_NAME"])
+                        DESG_NAME = Convert.IsDBNull(dr["DESG_NAME"]) ? null : Convert.ToString(dr["DESG_NAME"]),
+                        BANK_NAME = Convert.IsDBNull(dr["BANK_NAME"]) ? null : Convert.ToString(dr["BANK_NAME"]),
+                        PAYMENT_TYPE = Convert.IsDBNull(dr["PAYMENT_TYPE"]) ? 0 : Convert.ToInt32(dr["PAYMENT_TYPE"]),
+                        IS_INACTIVE = Convert.IsDBNull(dr["IS_INACTIVE"]) ? false : Convert.ToBoolean(dr["IS_INACTIVE"]),
+                        LEAVE_DAY_BALANCE = Convert.IsDBNull(dr["LEAVE_DAY_BALANCE"]) ? 0 : Convert.ToDecimal(dr["LEAVE_DAY_BALANCE"]),
+                        DAYS_DEDUCTED = Convert.IsDBNull(dr["DAYS_DEDUCTED"]) ? 0 : Convert.ToDecimal(dr["DAYS_DEDUCTED"])
                     });
                 }
                 connection.Close();
@@ -113,15 +109,14 @@ namespace RetailApi.DAL.Services
                     cmd.Parameters.AddWithValue("DOJ", (object)employee.DOJ ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("BANK_CODE", (object)employee.BANK_CODE ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("BANK_AC_NO", (object)employee.BANK_AC_NO ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("BANK_NAME", (object)employee.BANK_NAME ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("PAYMENT_TYPE", (object)employee.PAYMENT_TYPE ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("PP_NO", (object)employee.PP_NO ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("PP_EXPIRY", (object)employee.PP_EXPIRY ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("IQAMA_NO", (object)employee.IQAMA_NO ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("IQAMA_EXPIRY", (object)employee.IQAMA_EXPIRY ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("VISA_NO", (object)employee.VISA_NO ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("VISA_EXPIRY", (object)employee.VISA_EXPIRY ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("LICENSE_NO", (object)employee.LICENSE_NO ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("LICENSE_EXPIRY", (object)employee.LICENSE_EXPIRY ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("EMP_STATUS", (object)employee.EMP_STATUS ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("IS_SALESMAN", (object)employee.IS_SALESMAN ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("IMAGE_NAME", (object)employee.IMAGE_NAME ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("WORK_PERMIT_NO", (object)employee.WORK_PERMIT_NO ?? DBNull.Value);
@@ -129,14 +124,31 @@ namespace RetailApi.DAL.Services
                     cmd.Parameters.AddWithValue("IBAN_NO", (object)employee.IBAN_NO ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("DAMAN_NO", (object)employee.DAMAN_NO ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("DAMAN_CATEGORY", (object)employee.DAMAN_CATEGORY ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("LEAVE_CREDIT", (object)employee.LEAVE_CREDIT ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("LESS_SERVICE_DAYS", (object)employee.LESS_SERVICE_DAYS ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("HOLD_SALARY", (object)employee.HOLD_SALARY ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("MOL_NUMBER", (object)employee.MOL_NUMBER ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("LAST_REJOIN_DATE", (object)employee.LAST_REJOIN_DATE ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("INCENTIVE_PERCENT", (object)employee.INCENTIVE_PERCENT ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("STORE_ID", (object)employee.STORE_ID ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("IS_INACTIVE", (object)employee.IS_INACTIVE ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("LEAVE_DAY_BALANCE", (object)employee.LEAVE_DAY_BALANCE ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("DAYS_DEDUCTED", (object)employee.DAYS_DEDUCTED ?? DBNull.Value);
 
+
+                    DataTable tbl1 = new DataTable();
+
+                    tbl1.Columns.Add("EMP_ID", typeof(Int32));
+                    tbl1.Columns.Add("HEAD_ID", typeof(Int32));
+                    tbl1.Columns.Add("AMOUNT", typeof(float));
+
+                    if (employee.EmployeeSalary != null && employee.EmployeeSalary.Any())
+                    {
+                        foreach (EmployeeSalary ur1 in employee.EmployeeSalary)
+                        {
+                            DataRow dRow1 = tbl1.NewRow();
+                            dRow1["EMP_ID"] = ur1.EMP_ID;
+                            dRow1["HEAD_ID"] = ur1.HEAD_ID;
+                            dRow1["AMOUNT"] = ur1.AMOUNT;
+                            tbl1.Rows.Add(dRow1);
+                        }
+                    }
+                    cmd.Parameters.AddWithValue("@UDT_TB_EMPLOYEE_SALARY", tbl1);
 
 
                     Int32 StoreID = Convert.ToInt32(cmd.ExecuteScalar());
@@ -153,6 +165,7 @@ namespace RetailApi.DAL.Services
         public Employee GetItems(int id)
         {
             Employee employee = new Employee();
+            List<EmployeeSalary> employeeSalary = new List<EmployeeSalary>();
 
             try
             {
@@ -168,6 +181,8 @@ namespace RetailApi.DAL.Services
                 "TB_EMPLOYEE.LEAVE_CREDIT, TB_EMPLOYEE.LESS_SERVICE_DAYS, TB_EMPLOYEE.HOLD_SALARY, " +
                 "TB_EMPLOYEE.MOL_NUMBER, TB_EMPLOYEE.LAST_REJOIN_DATE, TB_EMPLOYEE.INCENTIVE_PERCENT, " +
                 "TB_EMPLOYEE.IS_DELETED, TB_EMPLOYEE.STORE_ID, " +
+                "TB_EMPLOYEE.BANK_NAME, TB_EMPLOYEE.PAYMENT_TYPE, " +
+                "TB_EMPLOYEE.IS_INACTIVE, TB_EMPLOYEE.LEAVE_DAY_BALANCE, TB_EMPLOYEE.DAYS_DEDUCTED, " +
 
                 "TB_STATE.STATE_NAME, TB_COUNTRY.COUNTRY_NAME, TB_EMPLOYEE_DEPARTMENT.DEPT_NAME, " +
                 "TB_EMPLOYEE_DESIGNATION.DESG_NAME, TB_STORES.STORE_NAME " + // Added space here
@@ -178,6 +193,26 @@ namespace RetailApi.DAL.Services
                 "LEFT JOIN TB_EMPLOYEE_DESIGNATION ON TB_EMPLOYEE.DESG_ID = TB_EMPLOYEE_DESIGNATION.ID " +
                 "LEFT JOIN TB_STORES ON TB_EMPLOYEE.STORE_ID = TB_STORES.ID " +
                 "WHERE TB_EMPLOYEE.ID = " + id;
+
+                string strSalarySQL = "SELECT ID,EMP_ID,HEAD_ID,AMOUNT FROM TB_EMPLOYEE_SALARY WHERE EMP_ID = " + id;
+
+                DataTable tblsalary = ADO.GetDataTable(strSalarySQL, "EmployeeSalary");
+
+                if (tblsalary.Rows.Count > 0)
+                {
+                    foreach(DataRow drsalary in tblsalary.Rows)
+                    {
+                        employeeSalary.Add(new EmployeeSalary
+                        {
+                            ID = ADO.ToInt32(drsalary["ID"]),
+                            HEAD_ID = ADO.ToInt32(drsalary["HEAD_ID"]),
+                            EMP_ID = ADO.ToInt32(drsalary["EMP_ID"]),
+                            AMOUNT = ADO.ToInt32(drsalary["AMOUNT"]),
+                        });
+                    }
+
+                    employee.EmployeeSalary = employeeSalary;
+                }
 
 
                 DataTable tbl = ADO.GetDataTable(strSQL, "Employee");
@@ -209,9 +244,7 @@ namespace RetailApi.DAL.Services
                     //employee.PP_EXPIRY = Convert.ToDateTime(dr["PP_EXPIRY"]);
                     employee.PP_EXPIRY = Convert.IsDBNull(dr["PP_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["PP_EXPIRY"]);
 
-                    employee.IQAMA_NO = Convert.ToString(dr["IQAMA_NO"]);
                     //employee.IQAMA_EXPIRY = Convert.ToDateTime(dr["IQAMA_EXPIRY"]);
-                    employee.IQAMA_EXPIRY = Convert.IsDBNull(dr["IQAMA_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["IQAMA_EXPIRY"]);
 
                     employee.VISA_NO = Convert.ToString(dr["VISA_NO"]);
                     employee.VISA_EXPIRY = Convert.ToDateTime(dr["VISA_EXPIRY"]);
@@ -219,7 +252,6 @@ namespace RetailApi.DAL.Services
                     //  employee.LICENSE_EXPIRY = Convert.ToDateTime(dr["LICENSE_EXPIRY"]);
                     employee.LICENSE_EXPIRY = Convert.IsDBNull(dr["LICENSE_EXPIRY"]) ? (DateTime?)null : Convert.ToDateTime(dr["LICENSE_EXPIRY"]);
 
-                    employee.EMP_STATUS = Convert.ToInt32(dr["EMP_STATUS"]);
                     employee.IS_SALESMAN = Convert.ToBoolean(dr["IS_SALESMAN"]);
                     employee.IMAGE_NAME = Convert.ToString(dr["IMAGE_NAME"]);
                     employee.WORK_PERMIT_NO = Convert.ToString(dr["WORK_PERMIT_NO"]);
@@ -229,23 +261,23 @@ namespace RetailApi.DAL.Services
                     employee.IBAN_NO = Convert.ToString(dr["IBAN_NO"]);
                     employee.DAMAN_NO = Convert.ToString(dr["DAMAN_NO"]);
                     employee.DAMAN_CATEGORY = Convert.ToString(dr["DAMAN_CATEGORY"]);
-                    employee.LEAVE_CREDIT = float.Parse(dr["LEAVE_CREDIT"].ToString());
-                    employee.LESS_SERVICE_DAYS = float.Parse(dr["LESS_SERVICE_DAYS"].ToString());
-                    employee.HOLD_SALARY = Convert.ToBoolean(dr["HOLD_SALARY"]);
                     employee.MOL_NUMBER = Convert.ToString(dr["MOL_NUMBER"]);
                     //employee.LAST_REJOIN_DATE = Convert.ToDateTime(dr["LAST_REJOIN_DATE"]);
                     employee.LAST_REJOIN_DATE = Convert.IsDBNull(dr["LAST_REJOIN_DATE"]) ? (DateTime?)null : Convert.ToDateTime(dr["LAST_REJOIN_DATE"]);
 
-                    employee.INCENTIVE_PERCENT = float.Parse(dr["INCENTIVE_PERCENT"].ToString());
-                    employee.STORE_ID = Convert.ToInt32(dr["STORE_ID"]);
-                    employee.IS_DELETED = Convert.ToString(dr["IS_DELETED"]);
+                    
+                    employee.IS_DELETED = Convert.ToBoolean(dr["IS_DELETED"]);
 
                     employee.STORE_NAME = Convert.ToString(dr["STORE_NAME"]);
 
                     employee.STATE_NAME = Convert.ToString(dr["STATE_NAME"]);
-                    employee.COUNTRY_NAME = Convert.ToString(dr["COUNTRY_NAME"]);
                     employee.DEPT_NAME = Convert.ToString(dr["DEPT_NAME"]);
                     employee.DESG_NAME = Convert.ToString(dr["DESG_NAME"]);
+                    employee.BANK_NAME = Convert.ToString(dr["BANK_NAME"]);
+                    employee.PAYMENT_TYPE = Convert.ToInt32(dr["PAYMENT_TYPE"]);
+                    employee.IS_INACTIVE = Convert.ToBoolean(dr["IS_INACTIVE"]);
+                    employee.LEAVE_DAY_BALANCE = Convert.ToDecimal(dr["LEAVE_DAY_BALANCE"]);
+                    employee.DAYS_DEDUCTED = Convert.ToDecimal(dr["DAYS_DEDUCTED"]);
 
                 }
             }
