@@ -194,7 +194,10 @@ namespace RetailApi.DAL.Services
                 "LEFT JOIN TB_STORES ON TB_EMPLOYEE.STORE_ID = TB_STORES.ID " +
                 "WHERE TB_EMPLOYEE.ID = " + id;
 
-                string strSalarySQL = "SELECT ID,EMP_ID,HEAD_ID,AMOUNT FROM TB_EMPLOYEE_SALARY WHERE EMP_ID = " + id;
+                string strSalarySQL = "SELECT TB_EMPLOYEE_SALARY.ID,TB_EMPLOYEE_SALARY.EMP_ID,TB_EMPLOYEE_SALARY.HEAD_ID,TB_SALARY_HEAD.HEAD_NAME,TB_EMPLOYEE_SALARY.AMOUNT " +
+                    "FROM TB_EMPLOYEE_SALARY " +
+                    "LEFT JOIN TB_SALARY_HEAD ON TB_EMPLOYEE_SALARY.HEAD_ID = TB_SALARY_HEAD.ID " +
+                    "WHERE EMP_ID = " + id;
 
                 DataTable tblsalary = ADO.GetDataTable(strSalarySQL, "EmployeeSalary");
 
@@ -206,6 +209,7 @@ namespace RetailApi.DAL.Services
                         {
                             ID = ADO.ToInt32(drsalary["ID"]),
                             HEAD_ID = ADO.ToInt32(drsalary["HEAD_ID"]),
+                            HEAD_NAME = ADO.ToString(drsalary["HEAD_NAME"]),
                             EMP_ID = ADO.ToInt32(drsalary["EMP_ID"]),
                             AMOUNT = ADO.ToInt32(drsalary["AMOUNT"]),
                         });

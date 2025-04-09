@@ -64,6 +64,7 @@
         public int ID { get; set; }
         public int EMP_ID { get; set; }
         public int HEAD_ID { get; set; }
+        public string HEAD_NAME { get; set; }
         public float? AMOUNT { get; set; }
     }
     public class EmployeeResponse
