@@ -3,6 +3,7 @@ using RetailApi.Helper;
 using RetailApi.Models;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net.Mail;
 
 namespace RetailApi.DAL.Services
 {
@@ -148,7 +149,37 @@ namespace RetailApi.DAL.Services
                             tbl1.Rows.Add(dRow1);
                         }
                     }
+
                     cmd.Parameters.AddWithValue("@UDT_TB_EMPLOYEE_SALARY", tbl1);
+
+                    DataTable tblAttachments = new DataTable();
+
+                    tblAttachments.Columns.Add("TRANS_TYPE", typeof(short));
+                    tblAttachments.Columns.Add("TRANS_ID", typeof(int));
+                    tblAttachments.Columns.Add("FILE_NAME", typeof(string));
+                    tblAttachments.Columns.Add("FILE_DATA", typeof(byte[]));
+                    tblAttachments.Columns.Add("REMARKS", typeof(string));
+                    tblAttachments.Columns.Add("CREATED_USER_ID", typeof(int));
+                    tblAttachments.Columns.Add("CREATED_TIME", typeof(DateTime));
+
+                    if (employee.Attachment != null && employee.Attachment.Any())
+                    {
+                        foreach (var file in employee.Attachment)
+                        {
+                            DataRow dRow = tblAttachments.NewRow();
+                            dRow["TRANS_TYPE"] = file.DOC_TYPE;
+                            dRow["TRANS_ID"] = file.DOC_ID;
+                            dRow["FILE_NAME"] = file.FILE_NAME;
+                            dRow["FILE_DATA"] = file.FILE_DATA; // should be a byte[]
+                            dRow["REMARKS"] = file.REMARKS ?? string.Empty;
+                            dRow["CREATED_USER_ID"] = file.USER_ID;
+                            dRow["CREATED_TIME"] = file.CREATED_DATE_TIME;
+
+                            tblAttachments.Rows.Add(dRow);
+                        }
+                    }
+
+                    cmd.Parameters.AddWithValue("@UDT_TB_ATTACHMENTS", tblAttachments);
 
 
                     Int32 StoreID = Convert.ToInt32(cmd.ExecuteScalar());
@@ -166,6 +197,7 @@ namespace RetailApi.DAL.Services
         {
             Employee employee = new Employee();
             List<EmployeeSalary> employeeSalary = new List<EmployeeSalary>();
+            List<EmpAttachment> empAttachments = new List<EmpAttachment>();
 
             try
             {
@@ -216,6 +248,33 @@ namespace RetailApi.DAL.Services
                     }
 
                     employee.EmployeeSalary = employeeSalary;
+                }
+
+                string strAttachmentsSQL = "SELECT ID, TRANS_TYPE, TRANS_ID, FILE_NAME, FILE_DATA, REMARKS, " +
+    "CREATED_USER_ID, CREATED_TIME, IS_DELETED, DELETED_USER_ID, DELETED_TIME " +
+    "FROM TB_ATTACHEMENTS " +
+    "WHERE TRANS_ID = " + id;
+
+                DataTable tblAttachments = ADO.GetDataTable(strAttachmentsSQL, "EmployeeAttachments");
+
+                if (tblAttachments.Rows.Count > 0)
+                {
+                    foreach (DataRow drAttachment in tblAttachments.Rows)
+                    {
+                        empAttachments.Add(new EmpAttachment
+                        {
+                            ID = ADO.ToInt32(drAttachment["ID"]),
+                            DOC_TYPE = ADO.ToInt32(drAttachment["TRANS_TYPE"]),
+                            DOC_ID = ADO.ToInt32(drAttachment["TRANS_ID"]),
+                            FILE_NAME = ADO.ToString(drAttachment["FILE_NAME"]),
+                            FILE_DATA = drAttachment["FILE_DATA"] as byte[],
+                            REMARKS = ADO.ToString(drAttachment["REMARKS"]),
+                            USER_ID = ADO.ToInt32(drAttachment["CREATED_USER_ID"]),
+                            CREATED_DATE_TIME = Convert.ToDateTime(drAttachment["CREATED_TIME"]),
+                        });
+                    }
+
+                    employee.Attachment = empAttachments;
                 }
 
 

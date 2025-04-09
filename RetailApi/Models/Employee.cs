@@ -58,6 +58,18 @@
 
 
         public List<EmployeeSalary> EmployeeSalary { get; set; }
+        public List<EmpAttachment> Attachment { get; set; }
+    }
+    public class EmpAttachment
+    {
+        public int ID { get; set; }
+        public int DOC_TYPE { get; set; }
+        public int DOC_ID { get; set; }
+        public string FILE_NAME { get; set; }
+        public byte[] FILE_DATA { get; set; }
+        public string REMARKS { get; set; }
+        public int USER_ID { get; set; }
+        public DateTime CREATED_DATE_TIME { get; set; }
     }
     public class EmployeeSalary
     {
