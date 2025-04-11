@@ -4,9 +4,9 @@
     {
         public int? DAILY_HOURS { get; set; }
         public int? MAX_OT_MTS { get; set; }
-        public float? NORMAL_OT_RATE { get; set; }
-        public float? HOLIDAY_OT_RATE { get; set; }
-        public float? LEAVE_SAL_DAYS { get; set; }
+        public decimal? NORMAL_OT_RATE { get; set; }
+        public decimal? HOLIDAY_OT_RATE { get; set; }
+        public decimal? LEAVE_SAL_DAYS { get; set; }
         public string? UQ_LABOUR_ID { get; set; }
         public string? BANK_AC_NO { get; set; }
         public string? BANK_CODE { get; set; }

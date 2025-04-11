@@ -31,9 +31,9 @@ namespace RetailApi.DAL.Services
                     DataRow dr = tbl.Rows[0];
                     settings.DAILY_HOURS = dr["DAILY_HOURS"] as int?;
                     settings.MAX_OT_MTS = dr["MAX_OT_MTS"] as int?;
-                    settings.NORMAL_OT_RATE = dr["NORMAL_OT_RATE"] as float?;
-                    settings.HOLIDAY_OT_RATE = dr["HOLIDAY_OT_RATE"] as float?;
-                    settings.LEAVE_SAL_DAYS = dr["LEAVE_SAL_DAYS"] as float?;
+                    settings.NORMAL_OT_RATE = ADO.ToDecimal(dr["NORMAL_OT_RATE"]);
+                    settings.HOLIDAY_OT_RATE = ADO.ToDecimal(dr["HOLIDAY_OT_RATE"]);
+                    settings.LEAVE_SAL_DAYS = ADO.ToDecimal(dr["LEAVE_SAL_DAYS"]);
                     settings.UQ_LABOUR_ID = dr["UQ_LABOUR_ID"]?.ToString();
                     settings.BANK_AC_NO = dr["BANK_AC_NO"]?.ToString();
                     settings.BANK_CODE = dr["BANK_CODE"]?.ToString();

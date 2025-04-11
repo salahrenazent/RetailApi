@@ -10,13 +10,13 @@
             public string ADDRESS2 { get; set; }
             public string ADDRESS3 { get; set; }
             public string CITY { get; set; }
-            public int STATE_ID { get; set; }
-            public int COUNTRY_ID { get; set; }
+            public int? STATE_ID { get; set; }
+            public int? COUNTRY_ID { get; set; }
             public string MOBILE { get; set; }
             public string EMAIL { get; set; }
             public bool? IS_MALE { get; set; }
-            public int DEPT_ID { get; set; }
-            public int DESG_ID { get; set; }
+            public int? DEPT_ID { get; set; }
+            public int? DESG_ID { get; set; }
             public DateTime? DOJ { get; set; }
 
             public string BANK_NAME { get; set; }
@@ -50,7 +50,7 @@
             public string STORE_NAME { get; set; }
 
             public bool IS_INACTIVE { get; set; }
-            public int PAYMENT_TYPE { get; set; }
+            public int? PAYMENT_TYPE { get; set; }
 
             public decimal LEAVE_DAY_BALANCE { get; set; }
             public decimal DAYS_DEDUCTED { get; set; }
